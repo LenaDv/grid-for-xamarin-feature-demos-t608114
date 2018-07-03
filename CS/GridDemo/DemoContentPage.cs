@@ -25,7 +25,7 @@ namespace DevExpress.GridDemo {
         
         protected override void OnBindingContextChanged() {
             base.OnBindingContextChanged();
-            if (Device.RuntimePlatform == Device.WinPhone)
+            if (Device.RuntimePlatform == Device.UWP)
                 Device.BeginInvokeOnMainThread(UpdateContent);
             else
                 UpdateContent();
@@ -77,7 +77,7 @@ namespace DevExpress.GridDemo {
         }
 
         void ReplacePages(List<Page> pages) {
-            if (Device.RuntimePlatform != Device.WinPhone) {
+            if (Device.RuntimePlatform != Device.UWP) {
                 ClearChildren();
                 foreach (Page page in pages)
                     Children.Add(page);
@@ -191,7 +191,7 @@ namespace DevExpress.GridDemo {
         }
 
         string ProcessCss(string css) {
-            if (Device.RuntimePlatform != Device.WinPhone)
+            if (Device.RuntimePlatform != Device.UWP)
                 return css;
 
             css = "@-ms-viewport{width:device-width; height:device-height;}\r\n" + css;

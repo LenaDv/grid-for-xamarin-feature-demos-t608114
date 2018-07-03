@@ -66,7 +66,7 @@ namespace DevExpress.GridDemo {
         Label lastChangedLabel;
         double labelPreviousValue;
 
-        void OnLabelPropertyChanging(object sender, PropertyChangingEventArgs e) {
+        void OnLabelPropertyChanging(object sender, Xamarin.Forms.PropertyChangingEventArgs e) {
             if(!(sender is Label))
                 return;
 
