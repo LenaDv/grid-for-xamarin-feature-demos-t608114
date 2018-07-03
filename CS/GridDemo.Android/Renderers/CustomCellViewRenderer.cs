@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using Android.Content;
 using Android.Graphics;
 using Android.Widget;
 using DevExpress.GridDemo;
@@ -11,6 +12,7 @@ using Color = Xamarin.Forms.Color;
 
 namespace GridDemoApp.Android {
     public class CustomCellViewRenderer : VisualElementRenderer<DemoListCellView> {
+        public CustomCellViewRenderer(Context context) : base(context) { }
         protected override void OnElementChanged(ElementChangedEventArgs<DemoListCellView> e) {
             SetBackgroundResource(Resource.Drawable.list_selector_pressed);
             base.OnElementChanged(e);
@@ -18,6 +20,7 @@ namespace GridDemoApp.Android {
     }
 
     public class HeaderLabelRenderer : LabelRenderer {
+        public HeaderLabelRenderer(Context context) : base(context) { }
         protected override void OnElementChanged(ElementChangedEventArgs<Label> e) {
             base.OnElementChanged(e);
             Element.Layout(new Rectangle(Element.X + 50, Element.Y, Element.Width, Element.Height));

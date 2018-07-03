@@ -25,7 +25,6 @@ namespace DevExpress.GridDemo {
                 groups.Add(group);
         }
         static DemoGroup CreateSortDemos() {
-            //ObservableCollection<DemoInfo> result = new ObservableCollection<DemoInfo>();
             DemoGroup group = new DemoGroup();
             group.Title = "Sort";
             group.ShortTitle = "Sort";

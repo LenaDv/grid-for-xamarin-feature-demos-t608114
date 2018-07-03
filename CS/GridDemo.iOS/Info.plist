@@ -11,7 +11,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>7.0</string>
+	<string>8.0</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
@@ -40,6 +40,8 @@
 		<string>icon@2x</string>
 	</array>
 	<key>CFBundleDisplayName</key>
+	<string>Grid Demo</string>
+	<key>CFBundleName</key>
 	<string>Grid Demo</string>
 </dict>
 </plist>

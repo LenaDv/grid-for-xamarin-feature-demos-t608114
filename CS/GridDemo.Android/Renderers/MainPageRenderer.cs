@@ -1,10 +1,12 @@
 ﻿using Xamarin.Forms.Platform.Android;
 using Android.Views;
 using Xamarin.Forms;
+using Android.Content;
 
 [assembly: ExportRenderer(typeof(DevExpress.GridDemo.MainPage), typeof(DevExpress.GridDemo.Android.MainPageRenderer))]
 namespace DevExpress.GridDemo.Android {
     public class MainPageRenderer : MasterDetailRenderer {
+        public MainPageRenderer(Context context) : base(context) { }
 
         public override bool OnInterceptTouchEvent(MotionEvent ev) {
             bool result = base.OnInterceptTouchEvent(ev);

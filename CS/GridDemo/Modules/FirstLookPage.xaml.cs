@@ -10,7 +10,6 @@ namespace DevExpress.GridDemo {
             InitializeComponent();
             BindData();
         }
-
         async void BindData() {
             MainPageViewModel model = await LoadData();
             BindingContext = model;

@@ -9,12 +9,14 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Droid = Android;
 using DevExpress.GridDemo;
+using Android.Content;
 
 [assembly: ExportRenderer(typeof(TabbedPage), typeof(GridDemoApp.Android.TabRenderer))]
 
 namespace GridDemoApp.Android {
 
     public class TabRenderer: TabbedRenderer {
+        public TabRenderer(Context context) : base(context) { }
 
         Activity activity;
         DisplayMetricsDensity dpi;

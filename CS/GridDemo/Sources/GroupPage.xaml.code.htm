@@ -5,70 +5,23 @@
 <link rel="stylesheet" type="text/css" href="highlight.css">
 </head>
 <body class="hl">
-<pre class="hl"><span class="hl kwa">using</span> DevExpress<span class="hl opt">.</span>Mobile<span class="hl opt">.</span>DataGrid<span class="hl opt">;</span>
-<span class="hl kwa">using</span> DevExpress<span class="hl opt">.</span>Mobile<span class="hl opt">.</span>DataGrid<span class="hl opt">.</span>Internal<span class="hl opt">;</span>
-<span class="hl kwa">using</span> DevExpress<span class="hl opt">.</span>Mobile<span class="hl opt">.</span>DataGrid<span class="hl opt">.</span>Theme<span class="hl opt">;</span>
-<span class="hl kwa">using</span> System<span class="hl opt">;</span>
+<pre class="hl"><span class="hl kwa">using</span> System<span class="hl opt">;</span>
 <span class="hl kwa">using</span> System<span class="hl opt">.</span>Collections<span class="hl opt">.</span>Generic<span class="hl opt">;</span>
 <span class="hl kwa">using</span> System<span class="hl opt">.</span>Linq<span class="hl opt">;</span>
 <span class="hl kwa">using</span> System<span class="hl opt">.</span>Text<span class="hl opt">;</span>
 <span class="hl kwa">using</span> System<span class="hl opt">.</span>Threading<span class="hl opt">.</span>Tasks<span class="hl opt">;</span>
-<span class="hl kwa">using</span> Xamarin<span class="hl opt">.</span>Forms<span class="hl opt">;</span>
 
 <span class="hl kwa">namespace</span> DevExpress<span class="hl opt">.</span>GridDemo <span class="hl opt">{</span>
     <span class="hl kwa">public partial class</span> GroupPage <span class="hl opt">{</span>
         <span class="hl kwa">public</span> <span class="hl kwd">GroupPage</span><span class="hl opt">() {</span>
-            <span class="hl slc">//ThemeManager.Theme.GroupCustomizer = new MyGroupCustomizer();</span>
             <span class="hl kwd">InitializeComponent</span><span class="hl opt">();</span>
             <span class="hl kwd">BindData</span><span class="hl opt">();</span>
-            <span class="hl slc">//grid.AllowGroupCollapse = false;</span>
         <span class="hl opt">}</span>
         <span class="hl kwa">async</span> <span class="hl kwb">void</span> <span class="hl kwd">BindData</span><span class="hl opt">() {</span>
             BindingContext <span class="hl opt">=</span> <span class="hl kwa">await</span> <span class="hl kwd">LoadData</span><span class="hl opt">();</span>
         <span class="hl opt">}</span>
         Task<span class="hl opt">&lt;</span>MainPageViewModel<span class="hl opt">&gt;</span> <span class="hl kwd">LoadData</span><span class="hl opt">() {</span>
             <span class="hl kwa">return</span> Task<span class="hl opt">&lt;</span>MainPageViewModel<span class="hl opt">&gt;.</span><span class="hl kwd">Run</span><span class="hl opt">(() =&gt;</span> <span class="hl kwa">new</span> <span class="hl kwd">MainPageViewModel</span><span class="hl opt">(</span><span class="hl kwa">new</span> <span class="hl kwd">DemoOrdersRepository</span><span class="hl opt">()));</span>
-        <span class="hl opt">}</span>
-    <span class="hl opt">}</span>
-
-
-    <span class="hl kwa">public class</span> MyGroupCustomizer <span class="hl opt">:</span> DarkGroupCustomizer <span class="hl opt">{</span>
-        <span class="hl kwa">public override</span> <span class="hl kwb">void</span> <span class="hl kwd">LocateViewInRow</span><span class="hl opt">(</span>View view<span class="hl opt">,</span> Rectangle cellBounds<span class="hl opt">) {</span>
-            <span class="hl kwa">base</span><span class="hl opt">.</span><span class="hl kwd">LocateViewInRow</span><span class="hl opt">(</span>view<span class="hl opt">,</span> cellBounds<span class="hl opt">);</span>
-
-            SimplyCellView scv <span class="hl opt">=</span> view as SimplyCellView<span class="hl opt">;</span>
-            <span class="hl kwa">if</span> <span class="hl opt">(</span>scv <span class="hl opt">==</span> <span class="hl kwa">null</span><span class="hl opt">)</span>
-                <span class="hl kwa">return</span><span class="hl opt">;</span>
-
-            scv<span class="hl opt">.</span>InputTransparent <span class="hl opt">=</span> <span class="hl kwa">false</span><span class="hl opt">;</span>
-
-            Grid gridContent <span class="hl opt">=</span> scv<span class="hl opt">.</span>Content as Grid<span class="hl opt">;</span>
-            <span class="hl kwa">if</span> <span class="hl opt">((</span>gridContent <span class="hl opt">==</span> <span class="hl kwa">null</span><span class="hl opt">) || (</span>gridContent<span class="hl opt">.</span>Children<span class="hl opt">.</span>Count <span class="hl opt">&lt;</span> <span class="hl num">2</span><span class="hl opt">))</span>
-                <span class="hl kwa">return</span><span class="hl opt">;</span>
-
-            Label groupTextLabel <span class="hl opt">=</span> gridContent<span class="hl opt">.</span>Children<span class="hl opt">[</span><span class="hl num">1</span><span class="hl opt">]</span> as Label<span class="hl opt">;</span>
-            <span class="hl kwa">if</span> <span class="hl opt">((</span>groupTextLabel <span class="hl opt">==</span> <span class="hl kwa">null</span><span class="hl opt">) ||</span> <span class="hl kwb">string</span><span class="hl opt">.</span><span class="hl kwd">IsNullOrEmpty</span><span class="hl opt">(</span>groupTextLabel<span class="hl opt">.</span>Text<span class="hl opt">))</span>
-                <span class="hl kwa">return</span><span class="hl opt">;</span>
-
-
-            <span class="hl kwb">string</span><span class="hl opt">[]</span> groupTextParts <span class="hl opt">=</span> groupTextLabel<span class="hl opt">.</span>Text<span class="hl opt">.</span><span class="hl kwd">Split</span><span class="hl opt">(</span><span class="hl kwa">new</span> <span class="hl kwb">string</span><span class="hl opt">[] {</span> <span class="hl str">&quot;: &quot;</span> <span class="hl opt">},</span> StringSplitOptions<span class="hl opt">.</span>RemoveEmptyEntries<span class="hl opt">);</span>
-            <span class="hl kwa">if</span> <span class="hl opt">(</span>groupTextParts<span class="hl opt">.</span>Length <span class="hl opt">!=</span> <span class="hl num">2</span><span class="hl opt">)</span>
-                <span class="hl kwa">return</span><span class="hl opt">;</span>
-
-            <span class="hl kwb">string</span> fieldName <span class="hl opt">=</span> groupTextParts<span class="hl opt">[</span><span class="hl num">0</span><span class="hl opt">];</span> <span class="hl slc">// Your field name</span>
-            <span class="hl kwb">string</span> fieldValue <span class="hl opt">=</span> groupTextParts<span class="hl opt">[</span><span class="hl num">1</span><span class="hl opt">];</span> <span class="hl slc">// Value of this row</span>
-
-            ScrollAreaView parentView <span class="hl opt">=</span> view<span class="hl opt">.</span>Parent as ScrollAreaView<span class="hl opt">;</span>
-            parentView<span class="hl opt">.</span>InputTransparent <span class="hl opt">=</span> <span class="hl kwa">false</span><span class="hl opt">;</span>
-
-            Button b <span class="hl opt">=</span> <span class="hl kwa">new</span> <span class="hl kwd">Button</span><span class="hl opt">() {</span> Text <span class="hl opt">=</span> <span class="hl str">&quot;Tap Me&quot;</span> <span class="hl opt">};</span>
-            b<span class="hl opt">.</span>Clicked <span class="hl opt">+=</span> Tap<span class="hl opt">;</span>
-            parentView<span class="hl opt">.</span>Children<span class="hl opt">.</span><span class="hl kwd">Add</span><span class="hl opt">(</span>b<span class="hl opt">);</span>
-            b<span class="hl opt">.</span><span class="hl kwd">Layout</span><span class="hl opt">(</span><span class="hl kwa">new</span> <span class="hl kwd">Rectangle</span><span class="hl opt">() {</span> X <span class="hl opt">=</span> <span class="hl num">150</span><span class="hl opt">,</span> Y <span class="hl opt">=</span> <span class="hl num">5</span><span class="hl opt">,</span> Width <span class="hl opt">=</span> <span class="hl num">200</span><span class="hl opt">,</span> Height <span class="hl opt">=</span> <span class="hl num">50</span> <span class="hl opt">});</span>
-        <span class="hl opt">}</span>
-
-        <span class="hl kwb">void</span> <span class="hl kwd">Tap</span><span class="hl opt">(</span><span class="hl kwb">object</span> sender<span class="hl opt">,</span> EventArgs e<span class="hl opt">) {</span>
-            <span class="hl opt">;</span>
         <span class="hl opt">}</span>
     <span class="hl opt">}</span>
 <span class="hl opt">}</span>
